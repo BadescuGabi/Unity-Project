@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class CollisionHandler : MonoBehaviour
 {
     private bool isTransitioning = false;
@@ -9,7 +10,10 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (isTransitioning || collisionDisabled) { return; }
+        if (isTransitioning || collisionDisabled)
+        {
+            return;
+        }
 
         switch (other.gameObject.tag)
         {
@@ -20,13 +24,13 @@ public class CollisionHandler : MonoBehaviour
                 break;
         }
     }
-    
+
     void ReloadLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
-    
+
     void StartCrashSequence()
     {
         isTransitioning = true;
@@ -34,5 +38,4 @@ public class CollisionHandler : MonoBehaviour
         Debug.Log("You lost!");
         ReloadLevel();
     }
-    
 }
